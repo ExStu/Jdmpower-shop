@@ -4,6 +4,7 @@ export type TypeProductData = {
 	description?: string
 	images: string[]
 	categoryId: number
+	manufactureId: number
 }
 
 export type TypeProductDataFilters = {
@@ -15,6 +16,7 @@ export type TypeProductDataFilters = {
 	minPrice?: string
 	maxPrice?: string
 	categoryId?: string
+	manufactureId?: string
 }
 
 export enum EnumProductSort {

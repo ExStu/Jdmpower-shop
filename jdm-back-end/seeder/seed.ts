@@ -10,26 +10,27 @@ const prisma = new PrismaClient()
 
 const createProducts = async (quantity: number) => {
   const products: Product[] = []
-  const news: News[] = []
+  // const news: News[] = []
 
-  for (let i = 0; i < quantity; i++) {
-    const newsName = faker.commerce.productName()
+  // for (let i = 0; i < quantity; i++) {
+  //   const newsName = faker.commerce.productName()
 
-    const newsPost = await prisma.news.create({
-      data: {
-        image: faker.image.imageUrl(500, 500, 'cat', true),
-        title: newsName,
-        description: faker.commerce.productDescription(),
-        slug: faker.helpers.slugify(newsName).toLowerCase()
-      }
-    })
+  //   const newsPost = await prisma.news.create({
+  //     data: {
+  //       image: faker.image.imageUrl(500, 500, 'cat', true),
+  //       title: newsName,
+  //       description: faker.commerce.productDescription(),
+  //       slug: faker.helpers.slugify(newsName).toLowerCase()
+  //     }
+  //   })
 
-    news.push(newsPost)
-  }
+  //   news.push(newsPost)
+  // }
 
   for (let i = 0; i < quantity; i++) {
     const productName = faker.commerce.productName()
     const categoryName = faker.commerce.department()
+    const manufactureName = faker.vehicle.manufacturer()
     // const brandName = faker.commerce.productMaterial()
 
     const product = await prisma.product.create({
@@ -43,6 +44,12 @@ const createProducts = async (quantity: number) => {
           create: {
             name: categoryName,
             slug: faker.helpers.slugify(categoryName).toLowerCase()
+          }
+        },
+        manufacture: {
+          create: {
+            name: manufactureName,
+            slug: faker.helpers.slugify(manufactureName).toLowerCase()
           }
         },
         reviews: {

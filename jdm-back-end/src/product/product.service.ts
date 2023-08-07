@@ -8,6 +8,7 @@ import { generateSlug } from 'src/utils/generate-slug'
 import { EnumProductSort, GetAllProductDto } from './dto/get-all.product.dto'
 import { ProductDto } from './dto/product.dto'
 import { returnProductObject, returnProductObjectFullest } from './return-product.object'
+import { ManufactureService } from 'src/manufacture/manufacture.service'
 
 
 @Injectable()
@@ -15,7 +16,8 @@ export class ProductService {
   constructor (
 		private prisma: PrismaService,
 		private paginationService: PaginationService,
-		private categoryService: CategoryService
+		private categoryService: CategoryService,
+		private manufactureService: ManufactureService,
 	) {}
   
   // async getAll(dto: GetAllProductDto = {}) {
@@ -116,6 +118,7 @@ export class ProductService {
 			)
 
 		if (dto.categoryId) filters.push(this.getCategoryFilter(+dto.categoryId))
+		if (dto.manufactureId) filters.push(this.getManufactureFilter(+dto.manufactureId))
 
 		return filters.length ? { AND: filters } : {}
 	}
@@ -205,6 +208,12 @@ export class ProductService {
 		}
 	}
 
+	private getManufactureFilter(manufactureId: number): Prisma.ProductWhereInput {
+		return {
+			manufactureId
+		}
+	}
+
 	
 
   async byId(id: number) {
@@ -242,6 +251,20 @@ export class ProductService {
 			where: {
 				category: {
 					slug: categorySlug
+				}
+			},
+			select: returnProductObjectFullest
+		})
+
+		if (!products) throw new NotFoundException('Products not found!')
+		return products
+	}
+
+  async byManufacture(manufactureSlug: string) {
+		const products = await this.prisma.product.findMany({
+			where: {
+				manufacture: {
+					slug: manufactureSlug
 				}
 			},
 			select: returnProductObjectFullest

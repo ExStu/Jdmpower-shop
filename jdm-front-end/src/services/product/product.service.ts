@@ -41,6 +41,13 @@ export const ProductService = {
 		})
 	},
 
+	async getByManufacture(manufactureSlug: string) {
+		return axiosClassic<IProduct[]>({
+			url: `${EnumUrl.MANUFACTURE}/by-manufacture/${manufactureSlug}`,
+			method: 'GET'
+		})
+	},
+
 	async getById(id: string | number) {
 		return instance<IProduct>({
 			url: `${EnumUrl.PRODUCTS}/${id}`,

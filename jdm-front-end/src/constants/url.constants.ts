@@ -1,5 +1,6 @@
 export enum EnumUrl {
   CATEGORY = 'categories',
+  MANUFACTURE = 'manufactures',
   NEWS = 'news',
   REVIEWS = 'reviews',
   USERS = 'users',
@@ -13,6 +14,11 @@ export enum EnumUrl {
 export enum AUTH_STEP {
   LOGIN = 'login',
   REGISTER = 'register'
+}
+
+export enum EnumPhones {
+  MOSCOW = '+7 (919) 102-52-17',
+  KRASNODAR = '+7 (928) 880-72-52',
 }
 
 export const MoscowPhoneUrl = 'tel:+79191025217'
