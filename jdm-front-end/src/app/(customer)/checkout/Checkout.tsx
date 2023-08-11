@@ -8,6 +8,9 @@ import Field from '@/ui/input/Field';
 import { useCart } from '@/hooks/useCart';
 import CartItem from '@/app/layout/header/cart/cart-item/CartItem';
 import { convertPrice } from '@/utils/convertPrice';
+import Heading from '@/ui/Heading'
+import { Tips } from '@/constants/form.constants'
+import { usePhoneMask } from '@/hooks/usePhoneMask'
 // import styles from './Cart.module.scss'
 
 
@@ -17,6 +20,8 @@ const Checkout: FC = () => {
     mode: 'onChange'
   })
 
+  const {onChange, onKeyDown} = usePhoneMask()
+
   const onSubmit: SubmitHandler<ICheckoutForm> = (data) => {
     console.log(data);
   }
@@ -25,9 +30,10 @@ const Checkout: FC = () => {
 
   return (
     // <div>Checkout page</div>
-    <div>
+    <div className='py-10'>
       <Container>
-        <div className='flex'>
+        <Heading className='text-center mb-5'>Checkout</Heading>
+        <div className='flex gap-x-5'>
           <div className='w-1/2'>
             {/* left side */}
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -47,30 +53,25 @@ const Checkout: FC = () => {
                   error={errors.name?.message}
                 />
                 <Field
-                  {...formRegister('surname', {
-                    required: 'surname is required',
-                    minLength: {
-                      value: 6,
-                      message: 'Not a valid surname'
-                    }
-                  })}
+                  {...formRegister('surname')}
                   type='surname'
                   className='ml-3 w-1/2'
                   placeholder='Surname'
-                  title='Surname*'
-                  error={errors.surname?.message}
+                  title='Surname'
+                  // error={errors.surname?.message}
                 />
               </div>
               <Field
                 {...formRegister('phone', {
-                  required: 'phone is required',
-                  minLength: {
-                    value: 6,
-                    message: 'Not a valid phone'
-                  }
+                  required: Tips.REQUIRED,
+                  validate: {
+                    phone: value => value.replace(/\D/g, '').length >= 11 || Tips.PHONE
+                  },
+                  onChange
                 })}
-                type='phone'
-                placeholder='Phone'
+                onKeyDown={onKeyDown}
+                type='tel'
+                placeholder='+7 (999) 999-99-99'
                 title='Phone*'
                 error={errors.phone?.message}
               />
@@ -88,43 +89,11 @@ const Checkout: FC = () => {
                 error={errors.email?.message}
               />
               <Field
-                {...formRegister('street', {
-                  required: 'street is required',
-                  minLength: {
-                    value: 6,
-                    message: 'Not a valid street'
-                  }
-                })}
-                type='street'
-                placeholder='Street'
-                title='Street*'
-                error={errors.street?.message}
-              />
-              <Field
-                {...formRegister('town', {
-                  required: 'town is required',
-                  minLength: {
-                    value: 6,
-                    message: 'Not a valid town'
-                  }
-                })}
+                {...formRegister('town')}
                 type='town'
                 placeholder='Town'
-                title='Town*'
-                error={errors.town?.message}
-              />
-              <Field
-                {...formRegister('state', {
-                  required: 'state is required',
-                  minLength: {
-                    value: 6,
-                    message: 'Not a valid state'
-                  }
-                })}
-                type='state'
-                placeholder='State'
-                title='State*'
-                error={errors.state?.message}
+                title='Town (if delivery required)'
+                // error={errors.town?.message}
               />
             </form>
 

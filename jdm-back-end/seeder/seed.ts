@@ -37,6 +37,7 @@ const createProducts = async (quantity: number) => {
       data: {
         name: productName,
         slug: faker.helpers.slugify(productName).toLowerCase(),
+        sku: faker.vehicle.vrm(),
         description: faker.commerce.productDescription(),
         price: +faker.commerce.price(10, 999, 0),
         images: Array.from({length: faker.datatype.number({min: 2, max: 6})}).map(() => faker.image.imageUrl(500, 500, 'cat', true)),

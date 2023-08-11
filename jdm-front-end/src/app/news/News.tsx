@@ -1,6 +1,7 @@
 'use client'
 
 import { INews } from '@/types/news.interface'
+import Heading from '@/ui/Heading'
 import { formatDate } from '@/utils/format-date'
 import moment from 'moment'
 import Image from 'next/image'
@@ -8,17 +9,20 @@ import { FC } from 'react'
 
 interface INewsPage {
   news: INews[]
+  // title?: string
   // click: () => void
 }
 
 const News: FC<INewsPage> = ({
-  news
+  news,
+  // title
 }) => {
 
   // const createDate = new Date()
 
   return (
     <>
+      {/* <Heading>{title}</Heading> */}
       {news.map(item => (
         <div className='flex border border-gray p-5'>
           <div className='mr-4'>

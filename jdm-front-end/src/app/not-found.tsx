@@ -9,7 +9,7 @@ export default function NotFound() {
 			<p>Could not find requested resource</p>
 			<p>
 				View{' '}
-				<Link href='/explorer' className='text-primary'>
+				<Link href='/shop' className='text-primary'>
 					all products
 				</Link>
 			</p>

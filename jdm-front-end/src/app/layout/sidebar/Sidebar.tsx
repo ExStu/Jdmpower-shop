@@ -17,7 +17,7 @@ const Sidebar: FC = () => {
     <div>
       {isLoading ? ( <Loader/>) : data ? (
         <>
-          <ul className='py-2'>
+          <ul className='py-2 z-50'>
             {convertToMenuItems(data).map(item => (
               <li key={item.href}>
                 <Link

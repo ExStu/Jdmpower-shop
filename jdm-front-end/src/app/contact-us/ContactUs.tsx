@@ -20,8 +20,19 @@ const ContactForm = () => {
     mode: 'onChange'
   })
 
-  const onSubmit: SubmitHandler<IContactForm> = (data) => {
+  const onSubmit: SubmitHandler<IContactForm> = async (data) => {
+    
     console.log(data);
+
+    await fetch('/api/send', {
+      method: 'POST',
+      body: JSON.stringify({
+        name: data.name,
+        email: data.email,
+        subject: data.subject,
+        message: data.message
+      })
+    })
   }
 
   return (
@@ -67,7 +78,7 @@ const ContactForm = () => {
                     {...formRegister('name', {
                       required: 'Name is required',
                       minLength: {
-                        value: 6,
+                        value: 3,
                         message: 'Not a valid name'
                       }
                     })}

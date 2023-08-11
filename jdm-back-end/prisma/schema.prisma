@@ -37,6 +37,7 @@ model Product {
 
   name        String   @unique
   slug        String   @unique
+  sku         String   @unique
   description String
   price       Int
   images      String[]
@@ -48,10 +49,10 @@ model Product {
   categoryId Int?      @map("category_id")
 
   manufacture   Manufacture? @relation(fields: [manufactureId], references: [id])
-  manufactureId Int?   @map("manufacture_id")
+  manufactureId Int?         @map("manufacture_id")
 
-  user    User?  @relation(fields: [userId], references: [id])
-  userId  Int?   @map("user_id")
+  user   User? @relation(fields: [userId], references: [id])
+  userId Int?  @map("user_id")
 }
 
 model News {
@@ -59,10 +60,10 @@ model News {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  image String
-  title String
+  image       String
+  title       String
   description String
-  slug String @unique
+  slug        String @unique
 }
 
 model Category {

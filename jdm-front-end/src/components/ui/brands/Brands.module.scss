@@ -1,0 +1,30 @@
+.logos {
+  @apply py-8 overflow-hidden px-16 whitespace-nowrap relative flex select-none;
+
+  mask-image: linear-gradient(
+    to right,
+    hsl(0 0% 0% / 0),
+    hsl(0 0% 0% / 1) 10%,
+    hsl(0 0% 0% / 1) 90%,
+    hsl(0 0% 0% / 0)
+  );
+
+  .logos__slide {
+    @apply flex;
+    animation: 60s slide infinite linear;
+  }
+  
+  .logos__slide_reverse {
+    animation-direction: reverse;
+  }
+}
+
+
+@keyframes slide {
+	from {
+		transform: translateX(0);
+	}
+	to {
+		transform: translateX(-100%);
+	}
+}

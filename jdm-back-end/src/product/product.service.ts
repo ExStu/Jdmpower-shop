@@ -156,6 +156,12 @@ export class ProductService {
 					}
 				},
 				{
+					sku: {
+						contains: searchTerm,
+						mode: 'insensitive'
+					}
+				},
+				{
 					description: {
 						contains: searchTerm,
 						mode: 'insensitive'
@@ -246,6 +252,21 @@ export class ProductService {
 		return product
   }
 
+	async bySku(sku: string) {
+		const product = await this.prisma.product.findUnique({
+			where: {
+				sku
+			},
+			select: returnProductObjectFullest
+		})
+
+		if(!product) {
+			throw new NotFoundException('Product not found')
+		}
+
+		return product
+	}
+
   async byCategory(categorySlug: string) {
 		const products = await this.prisma.product.findMany({
 			where: {
@@ -304,7 +325,8 @@ export class ProductService {
         description: '',
         name: '',
         price: 0,
-        slug: ''
+        slug: '',
+				sku: ''
       }
     })
 
@@ -312,7 +334,7 @@ export class ProductService {
   }
 
   async update(id: number, dto: ProductDto) {
-		const { description, images, price, name, categoryId } = dto
+		const { description, images, price, name, categoryId, sku } = dto
 
 		// await this.categoryService.byId(categoryId)
 
@@ -325,6 +347,7 @@ export class ProductService {
 				images,
 				price,
 				name,
+				sku,
 				slug: generateSlug(name),
 				category: {
 					connect: {

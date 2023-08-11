@@ -11,6 +11,9 @@ import { ProductService } from '@/services/product/product.service'
 import { TypeParamsFilters, TypeProductDataFilters } from '@/services/product/product.types'
 import { NewsService } from '@/services/news.service'
 import News from './news/News'
+import CarouselHome from '@/ui/carousel/Carousel'
+import Heading from '@/ui/Heading'
+import { carouselItems } from '@/ui/carousel/carousel.data'
 
 export const revalidate = 60
 
@@ -27,26 +30,30 @@ export async function Home({
   const data = await getProducts(searchParams)
 
   const news = await NewsService.getAll()
-  const slicedNews = news.slice(0,3)
+  const slicedNews = news.slice(0,2)
 
 	// const { queryParams, updateQueryParams } = useFilters()
 
   // const sortedData = updateQueryParams('sort', 'newest')
 
 
-  const slicedData = data.products.slice(0, 3)
+  const slicedData = data.products.slice(0, 5)
 
   // console.log(products);
 
   return (
     <div className=' bg-bg-color'>
+      <CarouselHome items={carouselItems}/>
       <Container>
-        <div className='grid grid-cols-3'>
+        <Heading className='mb-5'>Latest news</Heading>
+        <div className='grid grid-cols-2 pb-5 gap-5'>
           <News news={slicedNews}/>
         </div>
-        <Catalog title='New arrivals' products={slicedData} />
-        <Brands title='Brands we work with' items={brandsItems} />
+        <Catalog className='grid-cols-5 gap-8' title='New arrivals' products={slicedData} />
       </Container>
+      <div className='py-10'>
+        <Brands items={brandsItems} />
+      </div>
     </div>
     // Carousel + News
     // Our products => New arrivals .then Featured? 

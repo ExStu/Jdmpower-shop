@@ -1,5 +1,6 @@
 export type TypeProductData = {
 	name: string
+	sku: string
 	price: number
 	description?: string
 	images: string[]

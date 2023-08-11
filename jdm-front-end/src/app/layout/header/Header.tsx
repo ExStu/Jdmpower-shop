@@ -10,9 +10,20 @@ import HeaderCart from './cart/HeaderCart'
 import HeaderNavbar from './components/HeaderNavbar'
 import SearchField from './components/Search'
 import Socials from '@/ui/socials/Socials'
+import { useAuth } from '@/hooks/useAuth'
+import { useActions } from '@/hooks/useActions'
+import Link from 'next/link'
+import { Select } from 'antd'
+import styles from './Header.module.scss'
+
 
 
 const Header: FC = () => {
+
+  const {user} = useAuth()
+  const {logout} = useActions()
+
+  console.log(user);
 
   const router = useRouter()
 
@@ -24,17 +35,37 @@ const Header: FC = () => {
         <Container>
           <div className='flex items-center'>
 
-            <div className='mr-5 text-xs uppercase'>
+            {/* <div className='mr-5 text-xs uppercase'>
               English
-            </div>
-            <div className='text-xs uppercase'>
+            </div> */}
+            <Select
+              defaultValue='English'
+              bordered={false}
+              className={styles.customSelect}
+              options={[
+                {value: 'Russian', label: 'Russian'},
+                {value: 'English', label: 'English'}
+              ]}
+            />
+            <Select
+              defaultValue='USD'
+              bordered={false}
+              className={styles.customSelect}
+              options={[
+                {value: 'RUB', label: 'RUB'},
+                {value: 'USD', label: 'USD'},
+                {value: 'EUR', label: 'EUR'}
+              ]}
+            />
+            {/* <div className='text-xs uppercase'>
               Rub
-            </div>
+            </div> */}
             <div className='ml-auto flex items-center'>
-              <ul className='flex mr-5'>
-                <li className='mr-3 text-xs uppercase'>Register</li>
+              {/* <ul className='flex mr-5'>
+                <li className='mr-3 '>Register</li>
                 <li className='text-xs uppercase'>Login</li>
-              </ul>
+              </ul> */}
+              <div className='mr-3 text-xs'>{user ? <button className='uppercase hover:text-primary transition-colors duration-200' onClick={() => logout()}>Logout</button> : <button onClick={() => router.push('/auth')} className='uppercase hover:text-primary transition-colors duration-200'>Login</button>}</div>
               <Socials/>
             </div>
           </div>

@@ -1,0 +1,16 @@
+.customSelect {
+  :global {
+
+    .ant-select {
+      width: 120px
+    }
+
+    .ant-select-selection-item {
+      color: white
+    }
+
+    .ant-select-arrow {
+      color: white
+    }
+  }
+}

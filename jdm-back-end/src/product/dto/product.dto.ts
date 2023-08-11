@@ -5,6 +5,9 @@ export class ProductDto implements Prisma.ProductUpdateInput {
 	@IsString()
 	name: string
 
+	@IsString()
+	sku: string
+
 	@IsNumber()
 	price: number
 

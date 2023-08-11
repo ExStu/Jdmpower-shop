@@ -34,6 +34,13 @@ export const ProductService = {
 		})
 	},
 
+	async getBySku(sku: string) {
+		return axiosClassic<IProduct>({
+			url: `${EnumUrl.PRODUCTS}/${sku}`,
+			method: 'GET'
+		})
+	},
+
 	async getByCategory(categorySlug: string) {
 		return axiosClassic<IProduct[]>({
 			url: `${EnumUrl.PRODUCTS}/by-category/${categorySlug}`,

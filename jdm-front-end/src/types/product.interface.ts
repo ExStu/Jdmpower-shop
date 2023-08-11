@@ -5,6 +5,7 @@ export interface IProduct {
 	id: number
 	name: string
 	slug: string
+	sku: string
 	description: string
 	price: number
 	reviews: IReview[]

@@ -15,6 +15,7 @@ const ProductItem: FC<{product: IProduct}> = ({
       </div>
       <div className='pt-2 pb-4 px-4'>
         <h3 className='mb-1 text-sm'>{product.name}</h3>
+        <h3 className='mb-1 text-xs'><b className='mr-1 uppercase'>Sku</b>{product.sku}</h3>
         <h4 className='mb-2 text-xs'>{product.category.name}</h4>
         <strong className='block mb-2 font-semibold'>{convertPrice(product.price)}</strong>
         <div className='flex items-center justify-between'>
