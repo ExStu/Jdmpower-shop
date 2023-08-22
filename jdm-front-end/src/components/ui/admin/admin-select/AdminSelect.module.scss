@@ -1,0 +1,11 @@
+.selectContainer {
+	@apply relative mb-8;
+
+	> label {
+		@apply block;
+
+		> span {
+			@apply text-xs uppercase text-gray block mb-1;
+		}
+	}
+}

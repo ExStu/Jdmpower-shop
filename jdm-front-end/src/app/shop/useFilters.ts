@@ -2,7 +2,7 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'
 
 import { useActions } from '@/hooks/useActions'
-import { useTypedSelector } from '@/hooks/useTypedSelector'
+import { useAppSelector } from '@/hooks/useRedux'
 
 import { TypeProductDataFilters } from '@/services/product/product.types'
 
@@ -12,7 +12,7 @@ export const useFilters = () => {
 	const { updateQueryParam } = useActions()
 	const { replace } = useRouter()
 
-	const { queryParams, isFilterUpdated } = useTypedSelector(
+	const { queryParams, isFilterUpdated } = useAppSelector(
 		state => state.filters
 	)
 

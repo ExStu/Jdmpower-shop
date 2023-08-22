@@ -23,12 +23,17 @@ const colors = {
 	transparent: twColors.transparent,
 	black: '#2F2F3B',
 	gray: '#DDDDDD',
+	'dark-gray': '#747474',
 	white: twColors.white,
-	primary: '#C70909',
+	// primary: '#C70909',
+	primary: '#D04407',
 	secondary: '#222222',
+	tertiary: '#F6AE2D',
 	'bg-color': '#F8F8F8',
+	green: '#75CC73',
 	shark: '#23232b',
 	aqua: '#268697',
+	'primary-light': '#FE9E93',
 	red: twColors.red[400]
 }
 
@@ -80,6 +85,10 @@ module.exports = {
 			animation: {
 				opacity: 'animationOpacity .5s ease-in-out',
 				scaleIn: 'scaleIn .35s ease-in-out'
+			},
+			boxShadow: {
+				'full' : '0px 0px 30px 2px #00000047' 
+				// 0px 0px 30px 2px #00000047
 			}
 		}
 	},

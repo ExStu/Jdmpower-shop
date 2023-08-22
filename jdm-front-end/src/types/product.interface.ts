@@ -1,6 +1,10 @@
 import { ICategory } from './category.interface'
 import { IReview } from './review.interface'
 
+interface Image {
+	url: string
+}
+
 export interface IProduct {
 	id: number
 	name: string
@@ -8,6 +12,8 @@ export interface IProduct {
 	sku: string
 	description: string
 	price: number
+	discount: number
+	inStock: boolean
 	reviews: IReview[]
 	images: string[]
 	createdAt: string

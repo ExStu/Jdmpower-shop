@@ -14,6 +14,7 @@ import { carouselSlice } from './carousel/carousel.slice'
 import { cartSlice } from './cart/cart.slice'
 import { userSlice } from './user/user.slice'
 import { filtersSlice } from './filters/filters.slice'
+import * as formSlices from './formSlices'
 
 
 const isClient = typeof window !== 'undefined'
@@ -22,7 +23,11 @@ const combinedReducers = combineReducers({
 	cart: cartSlice.reducer,
 	carousel: carouselSlice.reducer,
 	user: userSlice.reducer,
-	filters: filtersSlice.reducer
+	filters: filtersSlice.reducer,
+	checkout: formSlices.form,
+	stepOne: formSlices.stepOne,
+	stepTwo: formSlices.stepTwo,
+	stepThree: formSlices.stepThree,
 })
 
 let mainReducer = combinedReducers
@@ -32,7 +37,7 @@ if (isClient) {
 	const storage = require('redux-persist/lib/storage').default
 
 	const persistConfig = {
-		key: 'amazon-v2',
+		key: 'jdmpower',
 		storage,
 		whitelist: ['cart']
 	}
@@ -53,3 +58,4 @@ export const store = configureStore({
 export const persistor = persistStore(store)
 
 export type TypeRootState = ReturnType<typeof mainReducer>
+export type AppDispatch = typeof store.dispatch

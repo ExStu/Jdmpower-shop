@@ -7,7 +7,7 @@ import Socials from '@/ui/socials/Socials'
 
 const Footer: FC = () => {
   return (
-    <div className='bg-shark text-white'>
+    <div className='bg-secondary text-white'>
       {/* top */}
       <div className='py-5'>
         <Container>

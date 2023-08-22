@@ -24,8 +24,8 @@ const Brands: FC<IBrands> = ({
   const firstHalf = items.slice(0, half)
   const secondHalf = items.slice(half)
 
-  console.log(firstHalf.length);
-  console.log(secondHalf.length);
+  // console.log(firstHalf.length);
+  // console.log(secondHalf.length);
 
   return (
     // 'py-10'

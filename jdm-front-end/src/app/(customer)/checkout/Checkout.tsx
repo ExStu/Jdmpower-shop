@@ -1,120 +1,68 @@
 'use client'
 
-import Container from '@/ui/Container';
-import { FC } from 'react'
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { ICheckoutForm } from './checkout.interface';
-import Field from '@/ui/input/Field';
-import { useCart } from '@/hooks/useCart';
-import CartItem from '@/app/layout/header/cart/cart-item/CartItem';
-import { convertPrice } from '@/utils/convertPrice';
-import Heading from '@/ui/Heading'
-import { Tips } from '@/constants/form.constants'
-import { usePhoneMask } from '@/hooks/usePhoneMask'
-// import styles from './Cart.module.scss'
+import { useMemo, type FC } from 'react'
+// import { useNavigate } from 'react-router-dom'
+
+// import { StepOne, StepTwo, StepThree } from './FormSteps'
+// import { SuccessTooltip, FailTooltip } from 'components/'
+// import { Box, ProgressBar } from 'components/ui'
+// import { useAppSelector, useFormSubmit } from 'utils/hooks'
+
+// import { getFormState } from 'store/selectors'
+import { useFormSubmit } from '@/hooks/checkout/useFormSubmit'
+import { useAppSelector } from '@/hooks/useRedux'
+import { getFormState } from '@/store/selectors'
+// import StepOne from './FormSteps/StepOne/StepOne'
+// import StepTwo from './FormSteps/StepTwo/StepTwo'
+// import StepThree from './FormSteps/StepThree/StepThree'
+import { StepOne, StepTwo, StepThree } from './FormSteps'
+import Container from '@/ui/Container'
+import ProgressBar from '@/ui/progressBar/ProgressBar'
+// import { Steps } from 'antd'
 
 
-const Checkout: FC = () => {
+export const Checkout: FC = () => {
+  const { currentStep, modalIsOpen, isSuccess } = useAppSelector(getFormState)
+  const { closeModal, onSuccess, onFail } = useFormSubmit()
+  // const navigate = useNavigate()
 
-  const {register: formRegister, handleSubmit, formState: {errors}, reset} = useForm<ICheckoutForm>({
-    mode: 'onChange'
-  })
+  const formSteps = useMemo(() => {
+    return [StepOne, StepTwo, StepThree]
+  }, [])
 
-  const {onChange, onKeyDown} = usePhoneMask()
+  // console.log(formSteps);
 
-  const onSubmit: SubmitHandler<ICheckoutForm> = (data) => {
-    console.log(data);
-  }
-
-  const {items, total} = useCart()
+  // useEffect(() => {
+  //   if (currentStep === 0) {
+  //     navigate('/', { replace: true })
+  //   }
+  // }, [])
 
   return (
-    // <div>Checkout page</div>
-    <div className='py-10'>
-      <Container>
-        <Heading className='text-center mb-5'>Checkout</Heading>
-        <div className='flex gap-x-5'>
-          <div className='w-1/2'>
-            {/* left side */}
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <div className='flex items-center'>
-                <Field
-                  {...formRegister('name', {
-                    required: 'Name is required',
-                    minLength: {
-                      value: 6,
-                      message: 'Not a valid name'
-                    }
-                  })}
-                  type='name'
-                  className='mr-3 w-1/2'
-                  placeholder='Name'
-                  title='Name*'
-                  error={errors.name?.message}
-                />
-                <Field
-                  {...formRegister('surname')}
-                  type='surname'
-                  className='ml-3 w-1/2'
-                  placeholder='Surname'
-                  title='Surname'
-                  // error={errors.surname?.message}
-                />
-              </div>
-              <Field
-                {...formRegister('phone', {
-                  required: Tips.REQUIRED,
-                  validate: {
-                    phone: value => value.replace(/\D/g, '').length >= 11 || Tips.PHONE
-                  },
-                  onChange
-                })}
-                onKeyDown={onKeyDown}
-                type='tel'
-                placeholder='+7 (999) 999-99-99'
-                title='Phone*'
-                error={errors.phone?.message}
-              />
-              <Field
-                {...formRegister('email', {
-                  required: 'email is required',
-                  minLength: {
-                    value: 6,
-                    message: 'Not a valid email'
-                  }
-                })}
-                type='email'
-                placeholder='E-mail'
-                title='E-mail*'
-                error={errors.email?.message}
-              />
-              <Field
-                {...formRegister('town')}
-                type='town'
-                placeholder='Town'
-                title='Town (if delivery required)'
-                // error={errors.town?.message}
-              />
-            </form>
+    <>
+        <Container>
+          <ProgressBar totalSteps={formSteps.length} currentStep={currentStep}/>
+          {/* <Steps current={currentStep}/> */}
+          {formSteps.map((FormStep, i) => (
+            i + 1 === currentStep && <FormStep key={i}/>
+          ))}
+        </Container>
+  
+        {/* {isSuccess
+          ? <SuccessTooltip
+            title="Форма успешно отправлена"
+            buttonText="На главную"
+            isOpen={modalIsOpen}
+            onAction={onSuccess}
+          />
+          : <FailTooltip
+            title="Ошибка"
+            isOpen={modalIsOpen}
+            onClose={closeModal}
+            onAction={onFail}
+          />} */}
+      </>
 
-          </div>
-          <div className='w-1/2'>
-            {/* right side */}
-            <div className='mb-5'>
-              {items.length ? items.map((item) => (
-                <CartItem key={item.id} item={item}/>
-              )) : (<div>Your cart is empty</div>)}
-            </div>
-            <div className='flex'>
-              {/* footer */}
-              <div>Total : </div>
-              <div>{convertPrice(total)}</div>
-            </div>
-          </div>
-        </div>
-      </Container>
-    </div>
+    // </Box>
   )
 }
-
-export default Checkout;

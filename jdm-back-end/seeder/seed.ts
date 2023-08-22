@@ -1,10 +1,31 @@
 import { faker } from '@faker-js/faker'
 import { News, PrismaClient, Product } from '@prisma/client'
 import * as dotenv from 'dotenv'
+// import { generateDiscount } from 'src/utils/random-number'
 // import { generateSlug } from 'src/utils/generate-slug'
 // import { getRandomNumber } from 'src/utils/random-number'
 
 dotenv.config()
+
+const getRandomInteger = (a = 0, b = 1) => {
+	const lower = Math.ceil(Math.min(a, b));
+	const upper = Math.floor(Math.max(a, b));
+
+	return Math.floor(lower + Math.random() * (upper - lower + 1));
+};
+
+const generateDiscount = () => {
+  const discounts = [
+    0.3,
+    0.2,
+    0.1,
+		0
+  ];
+
+  const randomIndex = getRandomInteger(0, discounts.length - 1);
+
+  return discounts[randomIndex];
+}
 
 const prisma = new PrismaClient()
 
@@ -19,7 +40,7 @@ const createProducts = async (quantity: number) => {
   //     data: {
   //       image: faker.image.imageUrl(500, 500, 'cat', true),
   //       title: newsName,
-  //       description: faker.commerce.productDescription(),
+  //       description: faker.commerce.productDescription().concat(faker.commerce.productDescription()),
   //       slug: faker.helpers.slugify(newsName).toLowerCase()
   //     }
   //   })
@@ -40,6 +61,8 @@ const createProducts = async (quantity: number) => {
         sku: faker.vehicle.vrm(),
         description: faker.commerce.productDescription(),
         price: +faker.commerce.price(10, 999, 0),
+        inStock: faker.datatype.boolean(0.5),
+        discount: generateDiscount().toFixed(2),
         images: Array.from({length: faker.datatype.number({min: 2, max: 6})}).map(() => faker.image.imageUrl(500, 500, 'cat', true)),
         category: {
           create: {
@@ -56,7 +79,7 @@ const createProducts = async (quantity: number) => {
         reviews: {
           create: [
             {
-              rating: faker.datatype.number({ min: 1, max: 5}),
+              // rating: faker.datatype.number({ min: 1, max: 5}),
               text: faker.lorem.paragraph(),
               user: {
                 connect: {
@@ -65,7 +88,7 @@ const createProducts = async (quantity: number) => {
               }
             },
             {
-              rating: faker.datatype.number({ min: 1, max: 5}),
+              // rating: faker.datatype.number({ min: 1, max: 5}),
               text: faker.lorem.paragraph(),
               user: {
                 connect: {

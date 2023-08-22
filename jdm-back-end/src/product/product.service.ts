@@ -20,63 +20,6 @@ export class ProductService {
 		private manufactureService: ManufactureService,
 	) {}
   
-  // async getAll(dto: GetAllProductDto = {}) {
-  //   const {sort, searchTerm} = dto
-
-  //   const prismaSort: Prisma.ProductOrderByWithRelationInput[] = []
-
-  //   if(sort === EnumProductSort.LOW_PRICE) {
-  //     prismaSort.push({price: 'asc'})
-  //   } else if(sort === EnumProductSort.HIGH_PRICE) {
-  //     prismaSort.push({price: 'desc'})
-  //   } else if(sort === EnumProductSort.OLDEST) {
-  //     prismaSort.push({createdAt: 'asc'})
-  //   } else {
-  //     prismaSort.push({createdAt: 'desc'})
-  //   }
-
-  //   const prismaSearchTermFilter: Prisma.ProductWhereInput = searchTerm ? {
-  //     OR: [
-	// 			{
-	// 				category: {
-	// 					name: {
-	// 						contains: searchTerm,
-	// 						mode: 'insensitive'
-	// 					}
-	// 				}
-	// 			},
-	// 			{
-	// 				name: {
-	// 					contains: searchTerm,
-	// 					mode: 'insensitive'
-	// 				}
-	// 			},
-	// 			{
-	// 				description: {
-	// 					contains: searchTerm,
-	// 					mode: 'insensitive'
-	// 				}
-	// 			}
-	// 		]
-  //   } : {}
-
-  //   const {perPage, skip} = this.paginationService.getPagination(dto)
-
-  //   const products = await this.prisma.product.findMany({
-  //     where: prismaSearchTermFilter,
-  //     orderBy: prismaSort,
-  //     skip,
-  //     take: perPage,
-	// 		select: returnProductObject
-  //   })
-
-  //   return {
-  //     products,
-  //     length: await this.prisma.product.count({
-  //       where: prismaSearchTermFilter
-  //     })
-  //   }
-  // }
 
 	async getAll(dto: GetAllProductDto = {}) {
 		const { perPage, skip } = this.paginationService.getPagination(dto)
@@ -104,10 +47,10 @@ export class ProductService {
 
 		if (dto.searchTerm) filters.push(this.getSearchTermFilter(dto.searchTerm))
 
-		if (dto.ratings)
-			filters.push(
-				this.getRatingFilter(dto.ratings.split('|').map(rating => +rating))
-			)
+		// if (dto.ratings)
+		// 	filters.push(
+		// 		this.getRatingFilter(dto.ratings.split('|').map(rating => +rating))
+		// 	)
 
 		if (dto.minPrice || dto.maxPrice)
 			filters.push(
@@ -171,17 +114,17 @@ export class ProductService {
 		}
 	}
 
-	private getRatingFilter(ratings: number[]): Prisma.ProductWhereInput {
-		return {
-			reviews: {
-				some: {
-					rating: {
-						in: ratings
-					}
-				}
-			}
-		}
-	}
+	// private getRatingFilter(ratings: number[]): Prisma.ProductWhereInput {
+	// 	return {
+	// 		reviews: {
+	// 			some: {
+	// 				rating: {
+	// 					in: ratings
+	// 				}
+	// 			}
+	// 		}
+	// 	}
+	// }
 
 	private getPriceFilter(
 		minPrice?: number,
@@ -231,7 +174,7 @@ export class ProductService {
     })
 
     if (!product) {
-			throw new Error('Product not found')
+			throw new NotFoundException('Product not found')
 		}
 
 		return product
@@ -326,7 +269,9 @@ export class ProductService {
         name: '',
         price: 0,
         slug: '',
-				sku: ''
+				sku: '',
+				discount: 0,
+				inStock: false,
       }
     })
 
@@ -334,9 +279,10 @@ export class ProductService {
   }
 
   async update(id: number, dto: ProductDto) {
-		const { description, images, price, name, categoryId, sku } = dto
+		const { description, images, price, name, categoryId, manufactureId, sku } = dto
 
-		// await this.categoryService.byId(categoryId)
+		await this.categoryService.byId(categoryId)
+		await this.manufactureService.byId(manufactureId)
 
 		return this.prisma.product.update({
 			where: {
@@ -352,6 +298,11 @@ export class ProductService {
 				category: {
 					connect: {
 						id: categoryId
+					}
+				},
+				manufacture: {
+					connect: {
+						id: manufactureId
 					}
 				}
 			}

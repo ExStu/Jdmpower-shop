@@ -1,3 +1,3 @@
-import { useTypedSelector } from './useTypedSelector'
+import { useAppSelector } from './useRedux'
 
-export const useAuth = () => useTypedSelector(state => state.user)
+export const useAuth = () => useAppSelector(state => state.user)

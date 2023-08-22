@@ -8,8 +8,14 @@ export class OrderController {
   constructor(private readonly orderService: OrderService) {}
 
   @Get()
-  @Auth()
-  getAll(@CurrentUser('id') userId: number) {
-    return this.orderService.getAll(userId)
+  @Auth('admin')
+  getAll() {
+    return this.orderService.getAll()
   }
+
+  @Get('by-user')
+	@Auth()
+	getByUserId(@CurrentUser('id') userId: number) {
+		return this.orderService.getByUserId(userId)
+	}
 }

@@ -5,7 +5,7 @@ import { axiosClassic, instance } from '@/api/api.interceptor'
 import { EnumUrl } from '@/constants/url.constants'
 
 type TypeData = {
-	rating: number
+	// rating: number
 	text: string
 }
 

@@ -10,7 +10,10 @@ const nextConfig = {
 			'loremflickr.com',
 			'www.aptronixindia.com',
 			'cloudflare-ipfs.com',
-			'avatars.githubusercontent.com'
+			'avatars.githubusercontent.com',
+			'disk.yandex.ru',
+			"downloader.disk.yandex.ru",
+			'localhost'
 		]
 	},
 }

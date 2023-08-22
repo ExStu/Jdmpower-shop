@@ -12,6 +12,7 @@ interface ICatalog {
   isLoading?: boolean,
   title?: string,
   className?: string
+  rowItem?: boolean
   // isPagination: boolean
 }
 
@@ -19,7 +20,8 @@ const Catalog: FC<ICatalog> = ({
   products,
   isLoading,
   title,
-  className
+  className,
+  rowItem
   // isPagination = false
 }) => {
 
@@ -32,15 +34,15 @@ const Catalog: FC<ICatalog> = ({
       {products.length ? (
         <>
           <div className={cn(
-            'grid grid-cols-4 gap-6', className
+            'grid ', className
           )}>
 
-            {products.map(product => <ProductItem key={product.id} product={product}/>)}
+            {products.map(product => <ProductItem row={rowItem} key={product.id} product={product}/>)}
           </div>
           {/* {isPagination && <Button variant='dark'>Load more</Button>} */}
         </>
       ) : (
-        <div>No results found</div>
+        <div className='h-[50vh]'>No results found</div>
       )}
     </section>
   )

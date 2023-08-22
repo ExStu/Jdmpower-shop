@@ -4,9 +4,17 @@ import cn from 'clsx'
 interface IButton extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant: 'light' | 'dark'
   size?: 'sm' | 'md' | 'lg'
+  onClick?: () => void
 }
 
-const Button: FC<PropsWithChildren<IButton>> = ({children, className, variant, size = 'md', ...rest}) => {
+const Button: FC<PropsWithChildren<IButton>> = ({
+  children, 
+  className,
+  type = 'button', 
+  variant, 
+  size = 'md', 
+  ...rest
+  }) => {
   return(
     <button
       {...rest}

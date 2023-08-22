@@ -29,7 +29,7 @@ export const UserService = {
 	},
 
 	async toggleFavorite(productId: string | number) {
-		return instance<IUser>({
+		return instance<IFullUser>({
 			url: `${EnumUrl.USERS}/profile/favorites/${productId}`,
 			method: 'PATCH'
 		})

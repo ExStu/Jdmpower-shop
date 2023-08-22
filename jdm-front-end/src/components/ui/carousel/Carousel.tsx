@@ -16,14 +16,14 @@ const CarouselHome: FC<ICarousel> = ({
   className
 }) => {
   return (
-    <div className='mb-10 z-40'>
+    <div className='z-40'>
       <Carousel autoplay draggable>
         {items.map(item => (
           <div className='cursor-grab'>
             <Image
               src={item.image}
               alt={item.title}
-              width={1920}
+              width={1400}
               height={500}
               className='object-cover h-[500px]'
             />

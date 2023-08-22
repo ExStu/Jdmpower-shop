@@ -22,7 +22,7 @@ const ContactForm = () => {
 
   const onSubmit: SubmitHandler<IContactForm> = async (data) => {
     
-    console.log(data);
+    // console.log(data);
 
     await fetch('/api/send', {
       method: 'POST',

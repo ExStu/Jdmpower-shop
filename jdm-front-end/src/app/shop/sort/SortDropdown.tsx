@@ -17,7 +17,8 @@ const SortDropdown: FC<ISortDropdown> = ({length}) => {
 	return (
     <div className='border border-gray flex justify-between items-center py-2 px-2'>
       <div className='text-xs'>
-        Showing 1-8 of {length} results
+        {length < 8 ? `Showing 1-${length} of ${length} results` : `Showing 1-8 of ${length} results`}
+        {/* Showing 1-8 of {length} results */}
       </div>
       <div className='text-right z-10 bg-white px-3 py-2 border border-gray rounded-sm text-sm'>
         <Select<EnumProductSort>

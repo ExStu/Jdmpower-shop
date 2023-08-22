@@ -2,8 +2,10 @@ export type TypeProductData = {
 	name: string
 	sku: string
 	price: number
+	inStock: boolean
+	discount: number
 	description?: string
-	images: string[]
+	images?: string[]
 	categoryId: number
 	manufactureId: number
 }

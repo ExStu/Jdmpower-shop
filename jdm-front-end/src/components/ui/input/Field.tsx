@@ -1,13 +1,22 @@
 import cn from 'clsx'
-import { forwardRef } from 'react'
+import { forwardRef, useState } from 'react'
 
 import { IField } from './field.interface'
 
 const Field = forwardRef<HTMLInputElement, IField>(
 	(
-		{ placeholder, error, className, type = 'text', style, Icon, title, ...rest },
+		{ placeholder, error, className, type = 'text', style, Icon, title, field, ...rest },
 		ref
 	) => {
+
+		// const [value, setValue] = useState('')
+
+		// const getValue = () => {
+		// 	if(field.value) {
+		// 		setValue(field.value)
+		// 	}
+		// }
+
 		return (
 			<div className={cn('mb-4', className)} style={style}>
 				<label>
@@ -18,6 +27,7 @@ const Field = forwardRef<HTMLInputElement, IField>(
 					<input
 						ref={ref}
 						type={type}
+						// value={field}
 						placeholder={placeholder}
 						className={cn(
 							'px-4 py-2 w-full outline-none border border-gray border-solid focus:border-primary transition-all placeholder:text-black/60 placeholder:text-sm',

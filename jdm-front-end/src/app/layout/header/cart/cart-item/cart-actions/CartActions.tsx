@@ -6,14 +6,19 @@ import { useCart } from '@/hooks/useCart'
 
 import { ICartItem } from '@/types/cart.interface'
 
-const CartActions: FC<{ item: ICartItem }> = ({ item }) => {
+interface ICartActions {
+	item: ICartItem
+	full?: boolean
+}
+
+const CartActions: FC<ICartActions> = ({ item, full }) => {
 	const { removeFromCart, changeQuantity } = useActions()
 
 	const { items } = useCart()
 	const quantity = items.find(cartItem => cartItem.id === item.id)?.quantity
 
 	return (
-		<div className='mt-3'>
+		<div className={full ? 'w-44 py-4 flex justify-center items-center border-r border-gray h-full' : 'mt-3'}>
 			<div className='flex items-center gap-3'>
 				<button
 					onClick={() => changeQuantity({ id: item.id, type: 'minus' })}
@@ -33,12 +38,14 @@ const CartActions: FC<{ item: ICartItem }> = ({ item }) => {
 					<FiPlus fontSize={13} />
 				</button>
 
-				<button
-					onClick={() => removeFromCart({ id: item.id })}
-					className='ml-3 text-dark-primary'
-				>
-					<FiTrash />
-				</button>
+				{!full && (
+					<button
+						onClick={() => removeFromCart({ id: item.id })}
+						className='ml-3 text-dark-primary'
+					>
+						<FiTrash />
+					</button>
+				)}
 			</div>
 		</div>
 	)

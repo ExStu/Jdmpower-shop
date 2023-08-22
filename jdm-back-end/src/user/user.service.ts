@@ -20,10 +20,18 @@ export class UserService {
           select: {
             id: true,
             name: true,
+						sku: true,
             price: true,
             images: true,
             slug: true,
+						discount: true,
+						inStock: true,
 						category: {
+							select: {
+								slug: true
+							}
+						},
+						manufacture: {
 							select: {
 								slug: true
 							}

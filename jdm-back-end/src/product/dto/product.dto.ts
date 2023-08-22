@@ -11,10 +11,17 @@ export class ProductDto implements Prisma.ProductUpdateInput {
 	@IsNumber()
 	price: number
 
+	// @IsBoolean()
+	// inStock?: boolean
+
+	// @IsNumber()
+	// discount?: decimal
+
 	@IsOptional()
 	@IsString()
 	description: string
 
+	@IsOptional()
 	@IsString({ each: true })
 	@ArrayMinSize(1)
 	images: string[]

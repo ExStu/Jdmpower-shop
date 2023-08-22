@@ -1,88 +1,134 @@
 'use client'
 
+import { useActions } from '@/hooks/useActions'
+import { useAuth } from '@/hooks/useAuth'
+import { useProfile } from '@/hooks/useProfile'
+import { UserService } from '@/services/user.service'
 import Container from '@/ui/Container'
 import SquareButton from '@/ui/button/SquareButton'
+import Socials from '@/ui/socials/Socials'
+import { useQuery } from '@tanstack/react-query'
+import { Select } from 'antd'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { FC } from 'react'
 import { AiOutlineHeart } from 'react-icons/ai'
+import styles from './Header.module.scss'
 import HeaderCart from './cart/HeaderCart'
 import HeaderNavbar from './components/HeaderNavbar'
 import SearchField from './components/Search'
-import Socials from '@/ui/socials/Socials'
-import { useAuth } from '@/hooks/useAuth'
-import { useActions } from '@/hooks/useActions'
 import Link from 'next/link'
-import { Select } from 'antd'
-import styles from './Header.module.scss'
 
 
 
 const Header: FC = () => {
 
   const {user} = useAuth()
+  const {profile} = useProfile()
   const {logout} = useActions()
 
-  console.log(user);
+  const { data } = useQuery(['get profile'], () => UserService.getProfile())
+
+  // console.log(profile?.favorites);
+  
+  const userData = data?.data
+  // console.log(userData?.favorites);
 
   const router = useRouter()
 
+  const onLogout = () => {
+    logout()
+    router.refresh()
+  }
+
   return (
 
-    <header className='flex flex-col bg-secondary text-white'>
-      <div className='border-b border-black py-4'>
+    <header className='flex flex-col bg-white'>
+      <div className='border-b border-black bg-secondary py-4  text-white'>
         {/* top */}
         <Container>
-          <div className='flex items-center'>
-
-            {/* <div className='mr-5 text-xs uppercase'>
-              English
-            </div> */}
-            <Select
-              defaultValue='English'
-              bordered={false}
-              className={styles.customSelect}
-              options={[
-                {value: 'Russian', label: 'Russian'},
-                {value: 'English', label: 'English'}
-              ]}
-            />
-            <Select
-              defaultValue='USD'
-              bordered={false}
-              className={styles.customSelect}
-              options={[
-                {value: 'RUB', label: 'RUB'},
-                {value: 'USD', label: 'USD'},
-                {value: 'EUR', label: 'EUR'}
-              ]}
-            />
-            {/* <div className='text-xs uppercase'>
-              Rub
-            </div> */}
-            <div className='ml-auto flex items-center'>
-              {/* <ul className='flex mr-5'>
-                <li className='mr-3 '>Register</li>
-                <li className='text-xs uppercase'>Login</li>
-              </ul> */}
-              <div className='mr-3 text-xs'>{user ? <button className='uppercase hover:text-primary transition-colors duration-200' onClick={() => logout()}>Logout</button> : <button onClick={() => router.push('/auth')} className='uppercase hover:text-primary transition-colors duration-200'>Login</button>}</div>
+          <div className='flex items-center justify-between'>
+            <div>
+              <Select
+                defaultValue='English'
+                bordered={false}
+                className={styles.customSelect}
+                options={[
+                  {value: 'Russian', label: 'Russian'},
+                  {value: 'English', label: 'English'}
+                ]}
+              />
+              <Select
+                defaultValue='USD'
+                bordered={false}
+                className={styles.customSelect}
+                options={[
+                  {value: 'RUB', label: 'RUB'},
+                  {value: 'USD', label: 'USD'},
+                  {value: 'EUR', label: 'EUR'}
+                ]}
+              />
+            </div>
+            {/* <div> */}
               <Socials/>
+            {/* </div> */}
+            <div className='flex items-center'>
+              <div className='mr-3 text-xs'>
+                {user?.isAdmin && (
+                  <Link
+                    href='/admin'
+                    className='mr-3 hover:text-primary transition-colors duration-200'
+                  >
+                    Admin
+                  </Link>
+                )}
+                {user ? 
+                  <button 
+                    className='uppercase hover:text-primary transition-colors duration-200' 
+                    onClick={onLogout}
+                  >
+                    Logout
+                  </button> : 
+                  <button 
+                    onClick={() => router.replace('/auth')} 
+                    className='uppercase hover:text-primary transition-colors duration-200'
+                  >
+                    Login
+                  </button>
+                }
+              </div>
+              <div>
+                {userData && (userData.avatarPath ? (
+                  <Image
+                    alt={userData.name}
+                    src={userData.avatarPath}
+                    width={40}
+                    height={40}
+                    className='mr-3 block rounded-full'
+                  />
+                  ) : (
+                  <span>{userData.name.charAt(0)}</span>
+                  )
+                )}
+              </div>
             </div>
           </div>
         </Container>
       </div>
-      <div className='border-b border-black py-5'>
+      <div className='border-b border-gray py-5'>
         {/* middle */}
         <Container>
           <div className='flex items-center'>
+            <Link href='/' className='mr-auto'>
+              <Image
+                priority 
+                src='/images/JdmPower-logo-svg-2.svg'
+                alt='JdmPower logo'
+                width={250}
+                height={82}
+              />
+            </Link>
 
-            <Image 
-              src='/images/JdmPower-logo-v2.png'
-              alt='JdmPower logo'
-              width={250}
-              height={50}
-              className='mr-auto'
-            />
             <SearchField/>
             {/* <Link
               href='/favorites'
@@ -94,6 +140,7 @@ const Header: FC = () => {
               Icon={AiOutlineHeart}
               onClick={() => router.push('/favorites')}
               className='mr-5'
+              number={profile?.favorites.length}
             />
             <HeaderCart/>
           </div>

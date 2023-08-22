@@ -18,27 +18,33 @@ import CartItem from './cart-item/CartItem'
 const Cart: FC = () => {
 	const { isShow, setIsShow, ref } = useOutside(false)
 
-	const { items, total } = useCart()
+	const { items, total, discountTotal } = useCart()
+
+  // const closeCart = () => {
+    
+  // }
 
 	return (
-		<div ref={ref}>
+		<div >
 			<SquareButton
 				Icon={RiShoppingCartLine}
 				onClick={() => {
 					setIsShow(!isShow)
 				}}
 				number={items.length}
+        total={total}
+        discountTotal={discountTotal}
+        // className='p-3'
 			/>
 
 			{isShow && (
-        <div className='fixed left-0 top-0 z-10 w-full h-screen bg-black/30'>
+        <div className='fixed left-0 top-0 z-50 w-full h-screen bg-black/30'>
 
-          <div className={styles.cartWrapper}>
+          <div ref={ref} className={styles.cartWrapper}>
             <div className='flex items-center justify-between border-b border-b-black/30 pb-4 font-normal text-lg mb-2'>
               <h3>Cart</h3>
               <RxCross2 size={28} className='cursor-pointer' onClick={() => {setIsShow(!isShow)}}/>
             </div>
-
             <div className={styles.cart}>
               {items.length ? (
                 items.map(item => <CartItem item={item} key={item.id} />)
@@ -48,7 +54,7 @@ const Cart: FC = () => {
             </div>
             <div className={styles.footer}>
               <div>Total:</div>
-              <div>{convertPrice(total)}</div>
+              <div>{discountTotal > 0 ? convertPrice(total - discountTotal) : convertPrice(total)}</div>
             </div>
             {!!items.length && (
               <div className='text-center mt-7 mb-5'>

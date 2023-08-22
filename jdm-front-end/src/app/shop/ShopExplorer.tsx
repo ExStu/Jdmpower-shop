@@ -35,7 +35,7 @@ const ShopExplorer: FC<IShopExplorer> = ({
     <Container>
 
       <div className='flex py-8 justify-between'>
-        <div className='w-70 border border-gray bg-white px-6 py-4'>
+        <div className='w-80 mr-5 border border-gray bg-white px-6 py-4'>
           {/* left side */}
           {/* <Sidebar/> */}
           <Filters/>
@@ -46,7 +46,7 @@ const ShopExplorer: FC<IShopExplorer> = ({
             <SortDropdown length={initialProducts.length}/>
           </div>
           {/* right side */}
-          <Catalog products={data.products} isLoading={isFetching}/>
+          <Catalog className='grid-cols-4 gap-5' products={data.products} isLoading={isFetching}/>
           <Pagination
             changePage={page => updateQueryParams('page', page.toString())}
             currentPage={queryParams.page}
