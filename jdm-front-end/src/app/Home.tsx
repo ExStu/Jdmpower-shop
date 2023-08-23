@@ -53,18 +53,18 @@ export async function Home({
         <div className='py-10 bg-white'>
           <Container>
             <div className='flex flex-col'>
-              <Heading className='mb-5'>Latest news</Heading>
+              <Heading className='mb-5'>Последние новости</Heading>
               <div className='grid grid-cols-2 pb-5 gap-5'>
                 <News news={slicedNews}/>
               </div>
-              <Link href='/news' className='self-end flex items-center hover:text-primary transition-colors duration-200'>Show all&nbsp;<BsArrowUpRight/></Link>
+              <Link href='/news' className='self-end flex items-center hover:text-primary transition-colors duration-200'>Показать все&nbsp;<BsArrowUpRight/></Link>
             </div>
           </Container>
         </div>
       <Container>
         <div className='flex flex-col py-10'>
-          <Catalog className='grid-cols-5 gap-8' title='New arrivals' products={slicedData} />
-          <Link href='/shop?page=1' className='mt-5 self-end flex items-center hover:text-primary transition-colors duration-200'>Show all&nbsp;<BsArrowUpRight/></Link>
+          <Catalog className='grid-cols-5 gap-8' title='Недавно добавленные' products={slicedData} />
+          <Link href='/shop?page=1' className='mt-5 self-end flex items-center hover:text-primary transition-colors duration-200'>Показать все&nbsp;<BsArrowUpRight/></Link>
         </div>
       </Container>
       <div className='py-10 bg-white'>

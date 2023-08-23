@@ -9,10 +9,10 @@ const AboutUs = () => {
   return (
     <div className='py-10'>
       <Container>
-        <Heading className='text-center mb-5'>About us</Heading>
+        <Heading className='text-center mb-5'>О нас</Heading>
         <YMaps>
           <div className='flex flex-col'>
-            <h3 className='font-semibold'>Moscow</h3>
+            <h3 className='font-semibold'>Москва</h3>
             <Divider/>
             <div className='mb-10 flex justify-between'>
               <div>
@@ -43,7 +43,7 @@ const AboutUs = () => {
                 } defaultGeometry={[55.735256, 37.724184]} />
               </Map>
             </div>
-            <h3 className='font-semibold'>Krasnodar</h3>
+            <h3 className='font-semibold'>Краснодар</h3>
             <Divider/>
             <div className='flex justify-between'>
             <div>

@@ -42,18 +42,18 @@ const Cart: FC = () => {
 
           <div ref={ref} className={styles.cartWrapper}>
             <div className='flex items-center justify-between border-b border-b-black/30 pb-4 font-normal text-lg mb-2'>
-              <h3>Cart</h3>
+              <h3>Корзина</h3>
               <RxCross2 size={28} className='cursor-pointer' onClick={() => {setIsShow(!isShow)}}/>
             </div>
             <div className={styles.cart}>
               {items.length ? (
                 items.map(item => <CartItem item={item} key={item.id} />)
               ) : (
-                <div className='font-light'>Cart is empty!</div>
+                <div className='font-light'>Корзина пуста!</div>
               )}
             </div>
             <div className={styles.footer}>
-              <div>Total:</div>
+              <div>Итого:</div>
               <div>{discountTotal > 0 ? convertPrice(total - discountTotal) : convertPrice(total)}</div>
             </div>
             {!!items.length && (
@@ -63,7 +63,7 @@ const Cart: FC = () => {
                   href='/checkout'
                   onClick={() => setIsShow(false)}
                 >
-                  Checkout
+                  Оформить заказ
                 </Link>
               </div>
             )}

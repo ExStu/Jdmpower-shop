@@ -17,7 +17,7 @@ const SortDropdown: FC<ISortDropdown> = ({length}) => {
 	return (
     <div className='border border-gray flex justify-between items-center py-2 px-2'>
       <div className='text-xs'>
-        {length < 8 ? `Showing 1-${length} of ${length} results` : `Showing 1-8 of ${length} results`}
+        {length < 8 ? `Показано 1-${length} из ${length} результатов` : `Показано 1-8 из ${length} результатов`}
         {/* Showing 1-8 of {length} results */}
       </div>
       <div className='text-right z-10 bg-white px-3 py-2 border border-gray rounded-sm text-sm'>
@@ -25,7 +25,7 @@ const SortDropdown: FC<ISortDropdown> = ({length}) => {
           data={SORT_SELECT_DATA}
           onChange={value => updateQueryParams('sort', value.key.toString())}
           value={SORT_SELECT_DATA.find(value => value.key === queryParams.sort)}
-          title='Sort by'
+          title='Сортировать по'
         />
       </div>
     </div>

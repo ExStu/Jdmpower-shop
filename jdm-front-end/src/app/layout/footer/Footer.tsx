@@ -18,7 +18,7 @@ const Footer: FC = () => {
       <div className='border-t border-black py-5'>
         <Container>
           <div className='flex'>
-            <span className='block mr-auto text-xs'>&copy;&nbsp;2023 JdmPower-Shop. All rights reserved</span>
+            <span className='block mr-auto text-xs'>&copy;&nbsp;2023 JdmpowerShop. Все права защищены</span>
             <Socials/>
           </div>
         </Container>

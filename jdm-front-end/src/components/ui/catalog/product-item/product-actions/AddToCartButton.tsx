@@ -43,12 +43,12 @@ const AddToCartButton: FC<IAddToCartButton> = ({ product, preview }) => {
 				{/* <span className='mr-1'>Add to cart</span> */}
 				{currentElement ?	(
 					<div className='flex items-center'>
-						<span className='block mr-1 text-sm'>Added</span>
+						<span className='block mr-1 text-sm'>Добавлен</span>
 						<AiOutlineCheck size={22}/>
 					</div>
 				) : (
 					<div className='flex items-center'>
-						<span className='block mr-1 text-sm'>Add to cart</span>
+						<span className='block mr-1 text-sm'>В корзину</span>
 						<RiShoppingCart2Line size={22} />
 					</div>
 				) }

@@ -13,7 +13,7 @@ const CategoryGroup: FC = () => {
 	const { data, isLoading } = useCategories()
 
 	return (
-		<FilterWrapper title='Category'>
+		<FilterWrapper title='Категории'>
 			{isLoading ? (
 				<Loader />
 			) : data?.length ? (

@@ -50,11 +50,11 @@ const Header: FC = () => {
           <div className='flex items-center justify-between'>
             <div>
               <Select
-                defaultValue='English'
+                defaultValue='Русский'
                 bordered={false}
                 className={styles.customSelect}
                 options={[
-                  {value: 'Russian', label: 'Russian'},
+                  {value: 'Русский', label: 'Русский'},
                   {value: 'English', label: 'English'}
                 ]}
               />
@@ -84,16 +84,16 @@ const Header: FC = () => {
                 )}
                 {user ? 
                   <button 
-                    className='uppercase hover:text-primary transition-colors duration-200' 
+                    className='capitalize hover:text-primary transition-colors duration-200' 
                     onClick={onLogout}
                   >
-                    Logout
+                    Выйти
                   </button> : 
                   <button 
                     onClick={() => router.replace('/auth')} 
-                    className='uppercase hover:text-primary transition-colors duration-200'
+                    className='capitalize hover:text-primary transition-colors duration-200'
                   >
-                    Login
+                    Войти
                   </button>
                 }
               </div>

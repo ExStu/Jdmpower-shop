@@ -56,7 +56,7 @@ const PreviewButton: FC<IPreviewButton> = ({
           <div className='flex flex-col w-1/2 pr-4'>
             {/* right */}
             <h3 className='font-medium text-lg mb-1'>{product.name}</h3>
-            <p className='mb-2'><span className='font-semibold uppercase'>Sku&nbsp;</span>{product.sku}</p>
+            <p className='mb-2'><span className='font-semibold capitalize'>Артикул: &nbsp;</span>{product.sku}</p>
             <b 
               className='block font-semibold text-lg mb-2'
             >
@@ -71,12 +71,12 @@ const PreviewButton: FC<IPreviewButton> = ({
             </b>
             {product.inStock ? (
               <div className='p-1 flex self-start bg-green rounded-sm text-xs text-white'>
-                <span>In Stock</span>
+                <span>В наличии</span>
               </div>) 
                 : 
               (
                 <div className='p-1 flex self-start bg-tertiary rounded-sm text-xs text-white'>
-                  <span>Order</span>
+                  <span>На заказ</span>
                 </div>
               )
             }
@@ -85,7 +85,7 @@ const PreviewButton: FC<IPreviewButton> = ({
             
             <div className='flex gap-x-5'>
               <Link href={`/product/${product.slug}`} className='text-black hover:text-white hover:bg-primary transition-colors duration-200 bg-white border border-primary flex items-center self-start rounded-md mb-2 p-2'>
-                <span className='text-sm mr-2'>Check more</span>
+                <span className='text-sm mr-2'>Посмореть товар</span>
                 <BsArrowUpRight size={20}/>
               </Link>
               <AddToCartButton preview product={product}/>

@@ -68,11 +68,11 @@ const ProductItem: FC<IProductItem> = ({
             )}
             {!row && (product.inStock ? (
               <div className='absolute top-2 right-2 z-3 p-1 bg-green rounded-sm text-xs text-white'>
-                <span>In Stock</span>
+                <span>В наличии</span>
               </div>
             ) : (
               <div className='absolute top-2 right-2 z-3 p-1 bg-tertiary rounded-sm text-xs text-white'>
-                <span>Order</span>
+                <span>На заказ</span>
               </div>
             ))}
             {!row && (product.discount > 0 && (
@@ -81,20 +81,21 @@ const ProductItem: FC<IProductItem> = ({
               </div>
             ))}
           </div>
-          <PreviewButton className='opacity-0 group-hover:opacity-100 absolute top-20 left-24' product={product}/>
-          <div className='opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-50 absolute w-full px-6 bottom-5 z-10'>
+          <PreviewButton className='opacity-0 group-hover:opacity-100 absolute top-24 left-24' product={product}/>
+          {/* <div className='opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-50 absolute w-full px-6 bottom-5 z-10'>
             <div className='flex items-center justify-between'>
-              {/* <AddToCartButton product={product}/>   */}
-              <FavoriteButton productId={product.id}/>
+              <AddToCartButton product={product}/>  
             </div>
-          </div>
+          </div> */}
+          {!row && <FavoriteButton className={`absolute bottom-2 left-2`} productId={product.id}/>}
+        
         </div>
         <div className={row ? `flex` : `pt-2 pb-4 px-4`}>
           <h3 
             className={row ? 
             `border-r border-gray h-full flex items-center justify-center px-4 w-80 text-sm hover:text-primary cursor-pointer transition-colors duration-200`
              : 
-            `mb-1 text-xs hover:text-primary cursor-pointer transition-colors duration-200`
+            `mb-1 text-xs hover:text-primary cursor-pointer transition-colors duration-200 line-clamp-2`
             }
             onClick={() => router.push(`/product/${product.slug}`)}
           >
@@ -106,7 +107,7 @@ const ProductItem: FC<IProductItem> = ({
                 : 
               `mb-1 text-xs`
             }>
-            <b className='mr-1 uppercase font-semibold text-shark'>{!row && `Sku`}</b>
+            <b className='mr-1 uppercase font-semibold text-shark'>{!row && `Арт.`}</b>
             {product.sku}
           </h3>
           {/* <h4 className='mb-2 text-xs'>{product.category.name}</h4> */}

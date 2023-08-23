@@ -10,7 +10,7 @@ const ManufactureGroup: FC = () => {
   const {data, isLoading} = useManufactures()
 
 	return (
-		<FilterWrapper title='Manufactures'>
+		<FilterWrapper title='Производители'>
 			{isLoading ? (
 				<Loader />
 			) : data?.length ? (

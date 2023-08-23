@@ -16,7 +16,7 @@ export default async function NewsPage() {
   return (
     <Container>
       <div className='py-10'>
-        <h2 className='text-center text-2xl font-semibold mb-5'>News</h2>
+        <h2 className='text-center text-2xl font-semibold mb-5'>Новости</h2>
         <div className='grid grid-cols-2 gap-5 bg-white p-4'>
           <News news={data}/>
         </div>

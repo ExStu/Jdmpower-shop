@@ -40,31 +40,33 @@ export const StepOne: FC = () => {
   return (
     <form onSubmit={handleSubmit(nextStep)}>
       {/* right side */}
-      <TableHeaders/>
+      {items.length && <TableHeaders/>}
+      {/* <TableHeaders/> */}
       <div className='mb-5'>
         {items.length ? items.map((item) => (
           <CartItem {...formRegister('items')} full key={item.id} item={item}/>
-        )) : (<div>Your cart is empty</div>)}
+        )) : (<div className='h-[35vh]'>Корзина пуста!</div>)}
       </div>
 
       <div className='flex'>
         {/* footer */}
-        <p>Overall&nbsp;:&nbsp;</p>
+        <p>{discountTotal > 0 ? 'Всего : ' : 'Итого : '}</p>
         <p>{convertPrice(total)}</p>
       </div>
       {discountTotal > 0 && (
         <>
           <div className='flex mb-5'>
-            <p>Discount&nbsp;:&nbsp;</p>
+            <p>Скидка&nbsp;:&nbsp;</p>
             <p className='text-primary'>{convertPrice(discountTotal)}</p>
           </div>
           <div className='flex'>
-            <p>Total&nbsp;:&nbsp;</p>
+            <p>Итого&nbsp;:&nbsp;</p>
             <p>{convertPrice(total - discountTotal)}</p>
           </div>
         </>
       )}
-      <FormButtons submitDisabled={!isValid} previousStep={previousStep}/>
+      {items.length && <FormButtons submitDisabled={!isValid} previousStep={previousStep}/>}
+      
     </form>
   )
 }

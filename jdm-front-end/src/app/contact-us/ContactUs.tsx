@@ -40,8 +40,8 @@ const ContactForm = () => {
       <Container>
         <div className='flex bg-white px-8 py-5 gap-8'>
           <div className='flex flex-col w-1/2'>
-            <h2 className='capitalize font-semibold text-xl mb-5'>Contact us</h2>
-            <p className='mb-5 text-sm'>You may contact us directly through any of the following or fill in the form on the side. We will be happy to answer any of your questions and respond as soon as we can.</p>
+            <h2 className='capitalize font-semibold text-xl mb-5'>Контакты</h2>
+            <p className='mb-5 text-sm'>Вы можете связаться с нами напрямую через предостваленные ниже наши контакты, либо заполните форму справа и мы свяжемся с вами как только сможем.</p>
             <div className='text-sm'>
               <div className='py-4 border-t border-gray'>
                 <Link href={EmailUrl} className='flex items-center'>
@@ -51,7 +51,7 @@ const ContactForm = () => {
               </div>
               <div className='flex py-4 border-t border-gray'>
                 <div className='flex items-center border-r border-gray pr-4 mr-4'>
-                  <FiPhoneCall size={19} className='mr-4'/><span className='mr-2'>Moscow:</span><a href={MoscowPhoneUrl}>+7 (919) 102-52-17</a>
+                  <FiPhoneCall size={19} className='mr-4'/><span className='mr-2'>Москва:</span><a href={MoscowPhoneUrl}>+7 (919) 102-52-17</a>
                 </div>
                 <Link href={MoscowTelegramUrl} target='_blank'>
                   <FaTelegram className='hover:text-primary transition-colors duration-200' size={24}/>
@@ -59,7 +59,7 @@ const ContactForm = () => {
               </div>
               <div className='flex py-4 border-t border-gray'>
                 <div className='flex items-center border-r border-gray pr-4 mr-4'>
-                  <FiPhoneCall size={19} className='mr-4'/><span className='mr-2'>Krasnodar:</span><a href={KrasnodarPhoneUrl}>+7 (928) 880-72-52</a>
+                  <FiPhoneCall size={19} className='mr-4'/><span className='mr-2'>Краснодар:</span><a href={KrasnodarPhoneUrl}>+7 (928) 880-72-52</a>
                 </div>
                 <Link href={KrasnodarTelegramUrl} target='_blank'>
                   <FaTelegram className='hover:text-primary transition-colors duration-200' transition-colors duration-200 size={24}/>
@@ -68,7 +68,7 @@ const ContactForm = () => {
             </div>
           </div>
           <div className='flex flex-col w-1/2'>
-            <h3 className='capitalize font-semibold text-xl mb-5'>Contact form</h3>
+            <h3 className='capitalize font-semibold text-xl mb-5'>Контактная форма</h3>
             <form onSubmit={handleSubmit(onSubmit)} className='w-full'>
               {/* {isLoading ? (
                 <Loader/>
@@ -83,8 +83,8 @@ const ContactForm = () => {
                       }
                     })}
                     type='name'
-                    placeholder='Name'
-                    title='Name*'
+                    placeholder='Имя'
+                    title='Имя*'
                     error={errors.name?.message}
                   />
                   <Field
@@ -96,7 +96,7 @@ const ContactForm = () => {
                       }
                     })}
                     placeholder='example@example.com'
-                    title='Email*'
+                    title='Почта*'
                     error={errors.email?.message}
                   />
                   <Field
@@ -108,16 +108,16 @@ const ContactForm = () => {
                       }
                     })}
                     type='subject'
-                    placeholder='Subject'
-                    title='Subject*'
+                    placeholder='Тема'
+                    title='Тема*'
                     error={errors.subject?.message}
                   />
                   <Textarea
                     {...formRegister('message', {
                       required: 'Message is required'
                     })}
-                    placeholder='Message'
-                    title='Message*'
+                    placeholder='Сообщение'
+                    title='Сообщение*'
                     error={errors.message?.message}
                   />
                   <Button type='submit' variant='dark'>Send</Button>{' '}

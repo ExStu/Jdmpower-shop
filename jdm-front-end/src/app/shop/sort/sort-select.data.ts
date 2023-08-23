@@ -5,18 +5,18 @@ import { EnumProductSort } from '@/services/product/product.types'
 export const SORT_SELECT_DATA: ISelectItem<EnumProductSort>[] = [
 	{
 		key: EnumProductSort.HIGH_PRICE,
-		label: 'High price'
+		label: 'Высокой цене'
 	},
 	{
 		key: EnumProductSort.LOW_PRICE,
-		label: 'Low price'
+		label: 'Низкой цене'
 	},
 	{
 		key: EnumProductSort.NEWEST,
-		label: 'Newest'
+		label: 'Новые'
 	},
 	{
 		key: EnumProductSort.OLDEST,
-		label: 'Oldest'
+		label: 'Старые'
 	}
 ]

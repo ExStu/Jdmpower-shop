@@ -60,7 +60,7 @@ const SearchField: FC = () => {
 					className='relative text-sm py-3 px-4 w-full text-secondary outline-none border-y-2 border-l-2 border-gray rounded-l-md focus:border-primary transition-colors duration-200'
 					value={searchTerm}
 					onChange={handleOnChange}
-					placeholder='Search...'
+					placeholder='Поиск по названию или артикулу'
 				/>
 				{isOpen && (
 					<button
@@ -74,7 +74,7 @@ const SearchField: FC = () => {
 					onClick={handleSearch}
 					className='bg-primary text-white flex items-center justify-center py-3 px-8 text-xs font-medium rounded-r-md'
 				>
-          Search
+          Поиск
 					{/* <BsSearch /> */}
 				</button>
 			</div>

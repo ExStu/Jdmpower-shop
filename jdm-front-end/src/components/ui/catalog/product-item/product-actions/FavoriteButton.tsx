@@ -10,9 +10,10 @@ import {RxCross2} from 'react-icons/rx'
 interface IFavoriteButton {
 	productId: number
 	row?: boolean
+	className?: string
 }
 
-const FavoriteButton: FC<IFavoriteButton> = ({ productId, row }) => {
+const FavoriteButton: FC<IFavoriteButton> = ({ productId, row, className }) => {
 	const { profile } = useProfile()
 
 	const queryClient = useQueryClient()
@@ -32,7 +33,7 @@ const FavoriteButton: FC<IFavoriteButton> = ({ productId, row }) => {
 	const isExists = profile?.favorites.some(favorite => favorite.id === productId)
 
 	return (
-		<div>
+		<div className={className}>
 			{row ? (
 				<button onClick={() => mutate()} className='hover:text-primary transition-colors duration-200'>
 					<RxCross2 size={30}/>
@@ -41,12 +42,12 @@ const FavoriteButton: FC<IFavoriteButton> = ({ productId, row }) => {
 				<button 
 					onClick={() => mutate()} 
 					className={isExists ?
-						'text-white bg-primary-light rounded-md p-2 hover:text-primary transition-colors duration-200' 
+						'text-white bg-primary-light rounded-full p-1.5 hover:text-primary transition-colors duration-200' 
 					 		: 
-						'text-black hover:text-white hover:bg-primary transition-colors duration-200 bg-white shadow-md flex items-center justify-center rounded-md p-2'
+						'text-black hover:text-white hover:bg-primary transition-colors duration-200 bg-white shadow-md flex items-center justify-center rounded-full p-1.5'
 					}
 				>
-					{isExists ? <AiOutlineHeart size={25} /> : <AiOutlineHeart size={25}/>}
+					{isExists ? <AiOutlineHeart size={22} /> : <AiOutlineHeart size={22}/>}
 				</button>
 			)
 			}

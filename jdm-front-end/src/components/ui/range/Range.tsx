@@ -41,7 +41,7 @@ const Range: FC<IRange> = ({
 				min={min}
 				max={max}
 				type='number'
-				placeholder='From'
+				placeholder='От'
 				value={fromValue}
 				onChange={e => setFromValue(e.target.value)}
 			/>
@@ -50,7 +50,7 @@ const Range: FC<IRange> = ({
 				min={min}
 				max={max}
 				type='number'
-				placeholder='To'
+				placeholder='До'
 				value={toValue}
 				onChange={e => setToValue(e.target.value)}
 			/>
