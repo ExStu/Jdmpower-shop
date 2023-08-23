@@ -9,7 +9,7 @@ import {
   // ValidationPipe
 } from '@nestjs/common'
 import { FileInterceptor } from '@nestjs/platform-express'
-import { Auth } from 'src/auth/decorators/Auth.decorator'
+import { Auth } from '../auth/decorators/auth.decorator'
 import { FileResponse } from './file.dto'
 import { FilesService } from './files.service'
 
