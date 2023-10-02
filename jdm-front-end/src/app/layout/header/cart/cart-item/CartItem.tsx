@@ -24,7 +24,7 @@ const CartItem: FC<ICartItemFull> = ({ item, full }) => {
 		<div className={full ? 'flex border-b border-x border-gray' : styles.item}>
 			{full && (
 				<div className='flex items-center justify-center px-4 w-40'>
-					<button onClick={() => removeFromCart({ id: item.id })} className='hover:text-primary transition-colors duration-200'>
+					<button type='button' onClick={() => removeFromCart({ id: item.id })} className='hover:text-primary transition-colors duration-200'>
 						<FiTrash size={30}/>
 					</button>
 				</div>

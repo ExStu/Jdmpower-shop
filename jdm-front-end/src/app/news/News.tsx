@@ -25,7 +25,7 @@ const News: FC<INewsPage> = ({
     <>
       {/* <Heading>{title}</Heading> */}
       {news.map(post => (
-        <div className='flex border border-gray p-5'>
+        <div key={post.id} className='flex border border-gray p-5'>
           <div className='mr-4'>
             <Image width={320} height={320} src={post.image} alt={post.title}/>
             {/* {post.image} */}

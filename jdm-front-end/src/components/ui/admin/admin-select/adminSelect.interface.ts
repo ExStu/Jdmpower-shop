@@ -16,5 +16,6 @@ export interface ISelect extends IFieldProps {
 	options: Options<IOption>
 	isMulti?: boolean
 	field: ControllerRenderProps<any, any>
+	defaultValue: number
 	isLoading?: boolean
 }

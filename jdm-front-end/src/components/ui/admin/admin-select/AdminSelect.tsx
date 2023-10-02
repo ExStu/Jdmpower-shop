@@ -16,6 +16,7 @@ const AdminSelect: FC<ISelect> = ({
 	options,
 	field,
 	isLoading,
+	defaultValue
 }) => {
 	const onChange = (newValue: OnChangeValue<IOption, boolean>) => {
 		field.onChange(
@@ -41,6 +42,7 @@ const AdminSelect: FC<ISelect> = ({
 				<span>{placeholder}</span>
 				<ReactSelect
 					classNamePrefix="custom-select"
+					defaultValue={defaultValue}
 					placeholder={''}
 					options={options}
 					value={getValue()}

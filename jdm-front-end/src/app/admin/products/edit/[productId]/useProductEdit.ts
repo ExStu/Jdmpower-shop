@@ -53,7 +53,7 @@ export const useProductEdit = (setValue: UseFormSetValue<IProductEditInput>) => 
 
   const { mutate } = useMutation(
 		['update product'],
-		(data: IProductEditInput) => ProductService.update(id, data),
+		(data: IProductEditInput) => ProductService.update(data.id, data),
 		{
 			onSuccess() {
 				router.push(getAdminUrl('/products'))
@@ -69,13 +69,6 @@ export const useProductEdit = (setValue: UseFormSetValue<IProductEditInput>) => 
 
   const onSubmit: SubmitHandler<IProductEditInput> = (data) => {
     console.log(data);
-    // const formatted: IProductEditInput = {
-    //   "name": data.name,
-    //   "sku": data.sku,
-    //   "price": Number(data.price),
-    //   "categoryId": Number(data.categoryId),
-    //   "manufactureId": Number(data.manufactureId),
-    // }
 
     data.images.push(data.image)
     

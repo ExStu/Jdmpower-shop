@@ -34,16 +34,6 @@ const ProductEdit: FC = () => {
   //   name: 'images'
   // })
 
-  // name: string
-	// sku: string
-	// price: number
-	// inStock: boolean
-	// discount: number
-	// description?: string
-	// images: string[]
-	// categoryId: number
-	// manufactureId: number
-
   const {onSubmit} = useProductEdit(setValue)
   const {data: manufactures, isLoading: isManufacturesLoading} = useAdminManufactures()
   const {data: categories, isLoading: isCategoriesLoading} = useAdminCategories()
@@ -59,13 +49,6 @@ const ProductEdit: FC = () => {
           title='Name'
           error={errors.name?.message}
         />
-        {/* <Field
-          {...register('slug', {
-            required: 'Slug is required',
-          })}
-          placeholder='Slug'
-          error={errors.slug?.message}
-        /> */}
         <Field
           {...register('sku', {
             required: 'Sku is required',
@@ -181,6 +164,7 @@ const ProductEdit: FC = () => {
           control={control}
           render={({field, fieldState: {error}}) => (
             <DynamicSelect
+              defaultValue={field.value}
               error={error}
               field={field}
               placeholder='Manufactures'
@@ -204,6 +188,7 @@ const ProductEdit: FC = () => {
           control={control}
           render={({field, fieldState: {error}}) => (
             <DynamicSelect
+              defaultValue={field.value}
               error={error}
               field={field}
               placeholder='Categories'

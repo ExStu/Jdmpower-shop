@@ -13,13 +13,6 @@ export async function POST(request: Request) {
       to: 'exstu1@yandex.ru',
       subject: subject,
       react: EmailTemplate({name: name, email: email, subject: subject, message: message}),
-      // html: `
-      //   <img src='../../public/images/dick.png' alt='dick pic'>
-      //   <h1>Hey from, ${name}</h1>
-      //   <p>Subject is, ${subject}</p>
-      //   <p>${name}'s email - ${email}</p>
-      //   <p>${name}'s message - ${message}</p>
-      // `
     });
     return NextResponse.json({
       status: 'OK'

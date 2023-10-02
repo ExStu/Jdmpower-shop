@@ -57,7 +57,8 @@ export class AuthService {
         name: faker.person.firstName(),
         avatarPath: faker.image.avatar(),
         phone: faker.phone.number('+7 (###) ###-##-##'),
-        password: await hash(dto.password)
+        password: await hash(dto.password),
+        isAdmin: true
       }
     })
 

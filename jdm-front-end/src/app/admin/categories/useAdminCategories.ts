@@ -5,8 +5,12 @@ import { IListItem } from '@/ui/admin/admin-list/admin-list.interface'
 import { getAdminUrl } from '@/config/url.config'
 
 import { CategoryService } from '@/services/category.service'
+import { useRouter } from 'next/navigation'
 
 export const useAdminCategories = () => {
+
+	const router = useRouter()
+
 	const { data, isFetching, refetch } = useQuery(
 		['get admin categories'],
 		() => CategoryService.getAll(),
@@ -23,7 +27,17 @@ export const useAdminCategories = () => {
 		}
 	)
 
-	const { mutate } = useMutation(
+	const {mutate: createCategory} = useMutation(
+		['create category'],
+		() => CategoryService.create(),
+		{
+      onSuccess({data: id}) {
+        router.push(getAdminUrl(`/categories/edit/${id.id}`))
+      }
+    }
+	)
+
+	const { mutate: deleteCategory } = useMutation(
 		['delete category'],
 		(id: number) => CategoryService.delete(id),
 		{
@@ -34,7 +48,8 @@ export const useAdminCategories = () => {
 	)
 
 	return {
-		mutate,
+		deleteCategory,
+		createCategory,
 		data,
 		isFetching
 	}

@@ -20,11 +20,13 @@ import TableHeaders from './TableHeaders'
 export const StepOne: FC = () => {
   
   const {items, total, discountTotal} = useCart()
-  // const dispatch = useAppDispatch()
-  // console.log(items);
-  // dispatch(items)
+  const dispatch = useAppDispatch()
+  console.log(items);
+  // dispatch(setValues(items))
   const formStepState = useAppSelector(getStepOneState)
   const currentStep = useAppSelector(getCurrentStep)
+
+  // console.log(formStepState);
 
   const {form, previousStep, nextStep} = useFormStep<StepOneValues>({
     formStepState,

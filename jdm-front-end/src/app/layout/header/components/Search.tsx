@@ -82,7 +82,7 @@ const SearchField: FC = () => {
 				<div className='max-h-60 overflow-auto absolute top-16 left-0 text-sm w-full text-secondary border-2 border-gray rounded-md bg-white z-50'>
 					{filteredData?.map(productItem => (
 						<button className='block w-full' onClick={handleClick}>
-							<AutocompleteItem productItem={productItem}/>
+							<AutocompleteItem key={productItem.id} productItem={productItem}/>
 						</button>
 				))}
 				</div> 

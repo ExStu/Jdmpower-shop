@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, memo } from 'react'
 import { IconType } from 'react-icons'
 import cn from 'clsx'
 import { convertPrice } from '@/utils/convertPrice'
@@ -12,7 +12,7 @@ interface ISquareButton {
 	discountTotal?: number
 }
 
-const SquareButton: FC<ISquareButton> = ({ Icon, onClick, number, className, total, discountTotal }) => {
+const SquareButton: FC<ISquareButton> = memo(({ Icon, onClick, number, className, total, discountTotal }) =>{
 
 	return (
 		<button
@@ -42,6 +42,6 @@ const SquareButton: FC<ISquareButton> = ({ Icon, onClick, number, className, tot
 			}
 		</button>
 	)
-}
+})
 
 export default SquareButton

@@ -13,11 +13,11 @@ const initialState: FormPageState = {
 export const sendForm = createAsyncThunk(
   'form/sendForm',
   async (formValues: FormValues) => {
-    // console.log(formValues);
-    const {
-      data
-    } = await axios.post<FormValues>(`/api/send`, formValues)
-    return data
+    console.log(formValues);
+    // const {
+    //   data
+    // } = await axios.post<FormValues>(`/api/send`, formValues)
+    // return data
   }
 )
 

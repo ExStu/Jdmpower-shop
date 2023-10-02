@@ -35,7 +35,7 @@ const Brands: FC<IBrands> = ({
         {/* grid grid-cols-7 gap-5 */}
         <div className={styles.logos__slide}>
           {firstHalf.map(item => (
-            <div className='  px-4 flex items-center justify-center aspect-[16/9] object-cover h-[90px]'>
+            <div key={item.title} className='px-4 flex items-center justify-center aspect-[16/9] object-cover h-[90px]'>
               <Image
                 src={item.image}
                 alt={item.title}
@@ -47,7 +47,7 @@ const Brands: FC<IBrands> = ({
         </div>
         <div className={styles.logos__slide}>
           {firstHalf.map(item => (
-            <div className='  px-4 flex items-center justify-center aspect-[16/9] object-cover h-[90px]'>
+            <div key={item.title} className='  px-4 flex items-center justify-center aspect-[16/9] object-cover h-[90px]'>
               <Image
                 src={item.image}
                 alt={item.title}
@@ -62,7 +62,7 @@ const Brands: FC<IBrands> = ({
         {/* grid grid-cols-7 gap-5 */}
         <div className={[styles.logos__slide, styles.logos__slide_reverse].join(' ')}>
           {secondHalf.map(item => (
-            <div className='  px-4 flex items-center justify-center aspect-[16/9] object-cover h-[90px]'>
+            <div key={item.title} className='  px-4 flex items-center justify-center aspect-[16/9] object-cover h-[90px]'>
               <Image
                 src={item.image}
                 alt={item.title}
@@ -74,7 +74,7 @@ const Brands: FC<IBrands> = ({
         </div>
         <div className={[styles.logos__slide, styles.logos__slide_reverse].join(' ')}>
           {secondHalf.map(item => (
-            <div className='  px-4 flex items-center justify-center aspect-[16/9] object-cover h-[90px]'>
+            <div key={item.title} className='  px-4 flex items-center justify-center aspect-[16/9] object-cover h-[90px]'>
               <Image
                 src={item.image}
                 alt={item.title}

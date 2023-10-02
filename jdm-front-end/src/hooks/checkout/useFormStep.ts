@@ -9,8 +9,10 @@ import { sendForm, setCurrentStep } from '@/app/(customer)/checkout/slice'
 import { getAllValues } from 'store/selectors'
 import { useAppDispatch, useAppSelector } from '../useRedux'
 import { FormStepState, FormStepValues } from '@/app/(customer)/checkout/FormSteps/types'
+import { useCart } from '../useCart'
 // import { sendForm, setCurrentStep } from 'pages/FormPage/slice'
 // import { type FormStepState, type FormStepValues } from 'pages/FormPage/FormSteps/types'
+
 
 interface UseFormStepProps<T extends FormStepValues> {
   formStepState: FormStepState<T>
@@ -53,7 +55,6 @@ export const useFormStep = <T extends FormStepValues>({
     // if (currentStep === 0) {
     //   navigate('/create')
     // }
-    // console.log(data);
     saveValues(data)
     dispatch(setCurrentStep(currentStep + 1))
   }

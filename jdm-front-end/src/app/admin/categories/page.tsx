@@ -1,3 +1,4 @@
+import Container from '@/ui/Container'
 import Categories from './Categories'
 import { NO_INDEX_PAGE } from '@/constants/seo.constants'
 
@@ -7,5 +8,9 @@ export const metadata = {
 }
 
 export default function CategoriesPage() {
-	return <Categories />
+	return (
+		<Container>
+			<Categories />
+		</Container>
+	)
 }
